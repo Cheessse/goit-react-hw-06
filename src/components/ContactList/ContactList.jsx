@@ -13,13 +13,13 @@ const ContactList = () => {
   );
 
   return (
-    <div>
+    <>
       <ul className={css.contactList}>
         {filteredContacts.map((contact) => {
           return <Contact key={contact.id} contact={contact} />;
         })}
       </ul>
-    </div>
+    </>
   );
 };
 

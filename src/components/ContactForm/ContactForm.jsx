@@ -5,14 +5,22 @@ import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
 
 const ContactForm = () => {
-  const [name, setName] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.trim() === "" || phoneNumber.trim() === "") {
-      toast("Name and phone number are required.");
+      toast.error("Name and phone number are required.", {
+        position: "top-right",
+      });
+    } else if (name.trim().length < 3 || phoneNumber.trim().length < 3) {
+      toast.error("Name and phone number must be at least 3 characters long.", {
+        position: "top-right",
+      });
+      setName("");
+      setPhoneNumber("");
     } else {
       dispatch(addContact({ name, phoneNumber }));
       setName("");
@@ -29,26 +37,28 @@ const ContactForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <>
+      <form onSubmit={handleSubmit} className={css.form}>
         <Toaster />
         <input
           type="text"
           value={name}
           onChange={handleChangeName}
           placeholder="Name"
+          className={css.input}
         />
         <input
           type="text"
           value={phoneNumber}
           onChange={handleChangePhoneNumber}
           placeholder="Phone number"
+          className={css.input}
         />
         <button type="submit" className={css.button}>
           Add contacts
         </button>
       </form>
-    </div>
+    </>
   );
 };
 
