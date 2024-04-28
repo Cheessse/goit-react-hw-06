@@ -15,11 +15,11 @@ const Contact = ({ contact }) => {
     <div className={css.contactContainer}>
       <li className={css.contactItem}>
         <p className={css.userdata}>
-          <FaUserLarge />
+          <FaUserLarge color="coral" />
           Name: {contact.name}
         </p>
         <p className={css.userdata}>
-          <FaPhoneAlt />
+          <FaPhoneAlt color="coral" />
           Phone number: {contact.phoneNumber}
         </p>
       </li>
